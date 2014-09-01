@@ -1,6 +1,6 @@
 pyg = 'ay'
 
-original = raw_input('Enter a word:')
+original = input('Enter a word: ')
 
 # turn the original word into lowercase
 word = original.lower()
@@ -11,13 +11,13 @@ if len(original) > 1 and original.isalpha():
     first = word[0]
     
     # put it all together
-    new_word = word[1:len(new_word)] + first + pyg
+    new_word = word[1:len(word)] + first + pyg
     
-    print new_word  
+    print(new_word)   
     
-elif len(original) = 0
+elif len(original) == 0:
     
-    print original + pyg 
+    print(original + pyg )
     
 else:
-    print 'empty'
+    print('Invalid Input')  
