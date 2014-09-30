@@ -1,0 +1,1 @@
+This is my start on a chess game for Java.  I Eventually would like to make each of the different piece types into their own class as for the rule on how they will move.  Then I would be able to enforce the rules much easier.
