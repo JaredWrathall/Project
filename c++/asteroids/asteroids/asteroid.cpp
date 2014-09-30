@@ -1,6 +1,6 @@
 /***********************************************************************
  * Program:
- *    Skeet Shooter
+ *    Asteroids
  * Author:
  *    Jared Wrathall
  * Summary:
