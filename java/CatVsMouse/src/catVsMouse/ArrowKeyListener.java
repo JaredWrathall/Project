@@ -15,7 +15,9 @@ public class ArrowKeyListener implements KeyListener {
 	public static Icon mouseUp = new ImageIcon("C:/Users/Jared/workspace/catVsMouse/mouseup.JPG");
 	
 	public void keyPressed(KeyEvent e) {
-		
+		boolean isBlock = true;
+		boolean isValidMove = true;
+		int spaceNum = 0;
 		// initialize the swapping icon
 		Icon tempIcon = new ImageIcon();
 		
@@ -46,33 +48,68 @@ public class ArrowKeyListener implements KeyListener {
 	        case KeyEvent.VK_UP:
 	            // handle up 
 	        	System.out.println("UP");
-	        	// set the icon for swap
-	        	System.out.println("DOWN");
+
 	        	
-	        	// set the char for logical swap
-	        	tempChar = Main.grid.spaces[y - 1][x];
+	        	if (Main.grid.spaces[y - 1][x] == 'g'){
+	        		
 	        	
+		        	// set the char for logical swap
+		        	tempChar = Main.grid.spaces[y - 1][x];
+		        	
+		        	
+		        	// fix logical board
+		        	
+		        	// move mouse logical
+		        	Main.grid.spaces[y - 1][x] = Main.grid.spaces[y][x];
+		        	
+		        	// move etc
+		        	Main.grid.spaces[y][x]= tempChar;
+		        	
+		        	// move icons
+		        	
+		        	// move etc
+		        	Main.images[y][x].setIcon(Main.images[y - 1][x].getIcon()); 
+		        	
+		        	// move mouse 
+		        	Main.images[y - 1][x].setIcon(mouseUp);
+	        	}
+	        	else if (Main.grid.spaces[y - 1][x] == 'b'){
+		        	
+	        		while(isBlock){
+	        			
+	        			
+	        			if(Main.grid.spaces[y - 1 - spaceNum][x] == 'g'){
+	        				isBlock = false;
+	        			}
+	        			else if ( y - 1 - spaceNum <= 0){
+	        				isBlock = false;
+	        				isValidMove = false;
+	        			}
+	        			else
+	        				spaceNum++;
+
+	        		}
 	        	
-	        	// fix logical board
-	        	
-	        	// move mouse logical
-	        	Main.grid.spaces[y - 1][x] = Main.grid.spaces[y][x];
-	        	
-	        	// move etc
-	        	Main.grid.spaces[y][x]= tempChar;
-	        	
-	        	// move icons
-	        	
-	        	// move etc
-	        	Main.images[y][x].setIcon(Main.images[y - 1][x].getIcon()); 
-	        	
-	        	// move mouse 
-	        	Main.images[y - 1][x].setIcon(mouseUp); 
+	        		if (isValidMove){
+		        		// move empty space to mouse area
+		        		Main.images[y][x].setIcon(Main.images[y- 1 - spaceNum][x].getIcon());
+		        		Main.grid.spaces[y][x] = Main.grid.spaces[y - 1 - spaceNum][x];
+		        		
+		        		// move block to old empty
+		        		Main.images[y- 1 - spaceNum ][x].setIcon(Main.images[y- 1][x].getIcon());
+		        		Main.grid.spaces[y- 1 - spaceNum][x] = Main.grid.spaces[y - 1][x];
+		        		
+		        		// move the mouse
+		        		Main.images[y- 1][x].setIcon(mouseUp);
+		        		Main.grid.spaces[y- 1][x] = 'm';
+	        		}
+	        	}
 	            break;
 	        case KeyEvent.VK_DOWN:
 	            // handle down 	        	
 	        	System.out.println("DOWN");
-	        	        	
+	        	
+	        	if (Main.grid.spaces[y + 1][x] == 'g'){
 	        	// set the char for logical swap
 	        	tempChar = Main.grid.spaces[y + 1][x];
 	        	
@@ -91,11 +128,43 @@ public class ArrowKeyListener implements KeyListener {
 	        	
 	        	// move mouse 
 	        	Main.images[y + 1][x].setIcon(mouseDown); 
+	        	}
+	        	else if (Main.grid.spaces[y + 1][x] == 'b'){
+		        	
+	        		while(isBlock){
+	        			
+	        			
+	        			if(Main.grid.spaces[y + 1 + spaceNum][x] == 'g'){
+	        				isBlock = false;
+	        			}
+	        			else if ( y + 1 + spaceNum <= 0){
+	        				isBlock = false;
+	        				isValidMove = false;
+	        			}
+	        			else
+	        				spaceNum++;
+
+	        		}
+	        	
+	        		if (isValidMove){
+		        		// move empty space to mouse area
+		        		Main.images[y][x].setIcon(Main.images[y+ 1 + spaceNum][x].getIcon());
+		        		Main.grid.spaces[y][x] = Main.grid.spaces[y + 1 + spaceNum][x];
+		        		
+		        		// move block to old empty
+		        		Main.images[y+ 1 + spaceNum ][x].setIcon(Main.images[y+ 1][x].getIcon());
+		        		Main.grid.spaces[y+ 1 + spaceNum][x] = Main.grid.spaces[y + 1][x];
+		        		
+		        		// move the mouse
+		        		Main.images[y+ 1][x].setIcon(mouseDown);
+		        		Main.grid.spaces[y+ 1][x] = 'm';
+	        		}
 	        	       	
-	        	 
+	        	}
 	            break;
 	        case KeyEvent.VK_LEFT:
 	            // handle left
+	        	if (Main.grid.spaces[y][x - 1] == 'g'){
 	        	// set the char for logical swap
 	        	tempChar = Main.grid.spaces[y][x - 1];
 	        		        	
@@ -114,11 +183,42 @@ public class ArrowKeyListener implements KeyListener {
 	        	
 	        	// move mouse 
 	        	Main.images[y][x - 1].setIcon(mouseLeft); 
-	        	 
+	        	}
+	        	else if (Main.grid.spaces[y][x - 1] == 'b'){
+		        	
+	        		while(isBlock){
+	        			
+	        			
+	        			if(Main.grid.spaces[y][x - 1 - spaceNum] == 'g'){
+	        				isBlock = false;
+	        			}
+	        			else if ( x - 1 - spaceNum <= 0){
+	        				isBlock = false;
+	        				isValidMove = false;
+	        			}
+	        			else
+	        				spaceNum++;
+
+	        		}
+	        	
+	        		if (isValidMove){
+		        		// move empty space to mouse area
+		        		Main.images[y][x].setIcon(Main.images[y][x - 1 - spaceNum].getIcon());
+		        		Main.grid.spaces[y][x] = Main.grid.spaces[y][x - 1 - spaceNum];
+		        		
+		        		// move block to old empty
+		        		Main.images[y][x - 1 - spaceNum].setIcon(Main.images[y][x - 1].getIcon());
+		        		Main.grid.spaces[y][x - 1 - spaceNum] = Main.grid.spaces[y][x - 1];
+		        		
+		        		// move the mouse
+		        		Main.images[y][x - 1].setIcon(mouseRight);
+		        		Main.grid.spaces[y][x - 1] = 'm';
+	        		}
+	        	} 
 	            break;
 	        case KeyEvent.VK_RIGHT :
 	            // handle right
-	        	
+	        	if (Main.grid.spaces[y][x + 1] == 'g'){
 	        	tempChar = Main.grid.spaces[y][x + 1];
 	        	        	
 	        	// fix logical board
@@ -136,10 +236,48 @@ public class ArrowKeyListener implements KeyListener {
 	        	
 	        	// move mouse 
 	        	Main.images[y][x + 1].setIcon(mouseRight); 
-	            break;
-	            
-	            
+	        	}
+	        	else if (Main.grid.spaces[y][x + 1] == 'b'){
+		        	
+	        		while(isBlock){
+	        			
+	        			
+	        			if(Main.grid.spaces[y][x + 1 + spaceNum] == 'g'){
+	        				isBlock = false;
+	        			}
+	        			else if ( x + 1 + spaceNum <= 0){
+	        				isBlock = false;
+	        				isValidMove = false;
+	        			}
+	        			else
+	        				spaceNum++;
+
+	        		}
+	        	
+	        		if (isValidMove){
+		        		// move empty space to mouse area
+		        		Main.images[y][x].setIcon(Main.images[y][x + 1 + spaceNum].getIcon());
+		        		Main.grid.spaces[y][x] = Main.grid.spaces[y][x + 1 + spaceNum];
+		        		
+		        		// move block to old empty
+		        		Main.images[y][x + 1 + spaceNum].setIcon(Main.images[y][x + 1].getIcon());
+		        		Main.grid.spaces[y][x + 1 + spaceNum] = Main.grid.spaces[y][x + 1];
+		        		
+		        		// move the mouse
+		        		Main.images[y][x + 1].setIcon(mouseRight);
+		        		Main.grid.spaces[y][x + 1] = 'm';
+	        		}
+	        	}
+	            break;	            	            
 	 	     }
+	    
+		for(int  i = 0; i < 30; i++ ){
+			for(int j = 0; j < 30; j++){
+			System.out.print(Main.grid.spaces[i][j]);	
+				
+			}
+			System.out.print('\n');
+		}
 	}
 
 	@Override

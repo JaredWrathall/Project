@@ -23,10 +23,18 @@ public class PlayingGrid {
 		for(int  i = 0; i < 30; i++ ){
 			for(int j = 0; j < 30; j++){
 				spaces[i][j] = 'g';
+				
+				if (getRandomBoolean()){
+				spaces[i][j] = 'b';
+				}
 			}						
 		}
 		spaces[0][0] = 'm';
 	}
 	
 
+	public static boolean getRandomBoolean() {
+	       return Math.random() < 0.5;
+	       
+	   }
 }

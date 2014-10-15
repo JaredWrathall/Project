@@ -70,6 +70,13 @@ public class Main  {
 
 					gameFrame.add(images[i][j]);
 				}
+				else if (grid.spaces[i][j] == 'b')
+				{
+					ImageIcon icon = new ImageIcon("C:/Users/Jared/workspace/catVsMouse/block.JPG");
+					images[i][j] = new JLabel(icon);
+
+					gameFrame.add(images[i][j]);
+				}
 			}
 			System.out.println(sample);
 			sample = "";
